@@ -1,4 +1,4 @@
-package Objetos;
+package Entities;
 
 public class Cliente {
 	private int id;

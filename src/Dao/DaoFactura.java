@@ -1,39 +1,51 @@
 package Dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import Interfaces.Dao;
+import Entities.Factura;
+import factory.DAO_MYSQL_Factory;
+import factory.DaoFactory;
 
-public class DaoFactura  extends Conexion implements Dao{
+public class DaoFactura  implements DaoFactory{
 
 	@Override
-	public Optional get(long id) {
-		// TODO Apéndice de método generado automáticamente
+	public Optional<Factura> get(long id) {
+		
 		return null;
 	}
 
 	@Override
-	public List getAll() {
-		// TODO Apéndice de método generado automáticamente
-		return null;
+	public List<Factura> getAll() {
+		List<Factura> facturas = new ArrayList<>();
+		for {
+			
+		}
+		return facturas;
 	}
 
 	@Override
-	public void save(Object t) {
-		// TODO Apéndice de método generado automáticamente
+	public void insert(Object t) {
+		
 		
 	}
 
 	@Override
 	public void update(Object t, String[] params) {
-		// TODO Apéndice de método generado automáticamente
+		
 		
 	}
 
 	@Override
 	public void delete(Object t) {
-		// TODO Apéndice de método generado automáticamente
+		
+		
+	}
+
+	@Override
+	public void createTable() {
+		
 		
 	}
 

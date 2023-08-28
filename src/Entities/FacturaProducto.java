@@ -1,4 +1,4 @@
-package Objetos;
+package Entities;
 
 public class FacturaProducto {
 	private int idFactura;
@@ -7,9 +7,9 @@ public class FacturaProducto {
 	
 	
 	
-	public FacturaProducto(Factura factura, Producto producto, int cantidad) {
-		this.idFactura = factura.getIdFactura();
-		this.idProducto = producto.getIdProducto();
+	public FacturaProducto() {
+		this.idFactura = idFactura;
+		this.idProducto = idProducto;
 		this.cantidad = cantidad;
 	}
 
@@ -27,6 +27,14 @@ public class FacturaProducto {
 
 	public int getIdProducto() {
 		return idProducto;
+	}
+
+	public void setIdFactura(int nuevaFactura) {
+		this.idFactura = nuevaFactura;
+	}
+
+	public void setIdProducto(int nuevoProducto) {
+		this.idProducto = nuevoProducto;
 	}
 	
 	

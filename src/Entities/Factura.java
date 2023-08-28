@@ -1,4 +1,4 @@
-package Objetos;
+package Entities;
 
 public class Factura {
 	private int idFactura;

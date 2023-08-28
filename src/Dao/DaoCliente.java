@@ -3,10 +3,13 @@ package Dao;
 import java.util.List;
 import java.util.Optional;
 
-import Interfaces.Dao;
+import factory.DAO_MYSQL_Factory;
+import factory.DaoFactory;
 
-public class DaoCliente<Cliente> extends Conexion implements Dao {
+public class DaoCliente<Cliente> implements DaoFactory{
 
+	
+	
 	@Override
 	public Optional get(long id) {
 		
@@ -20,7 +23,7 @@ public class DaoCliente<Cliente> extends Conexion implements Dao {
 	}
 
 	@Override
-	public void save(Object t) {
+	public void insert(Object t) {
 		
 		
 	}
@@ -34,6 +37,12 @@ public class DaoCliente<Cliente> extends Conexion implements Dao {
 	@Override
 	public void delete(Object t) {
 	
+		
+	}
+
+	@Override
+	public void createTable() {
+		// TODO Apéndice de método generado automáticamente
 		
 	}
 

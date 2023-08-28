@@ -1,4 +1,4 @@
-package Objetos;
+package Entities;
 
 public class Producto {
 	private int idProducto;
