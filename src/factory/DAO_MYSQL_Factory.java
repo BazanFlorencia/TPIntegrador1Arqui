@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DAO_MYSQL_Factory {
+import Dao.DaoCliente;
+import Dao.DaoFactura;
+import Dao.DaoFacturaProducto;
+import Dao.DaoProducto;
+
+public class DAO_MYSQL_Factory extends DaoFactory{
 	protected static Connection conexion;
 	private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 	private final String URI = "jdbc:mysql://localhost:3306/exampledb";
@@ -47,6 +52,25 @@ public class DAO_MYSQL_Factory {
 		return instance;
 	}
 	
+	public void crearBaseDeDatos() {
+		//implementar
+	}
+	public DaoCliente getDaoCliente() {
+		//implementar
+		return null;
+	}
+	public DaoFactura getDaoFactura() {
+		//implementar
+		return null;
+	}
+	public DaoFacturaProducto getDaoFacturaProducto() {
+		//implementar
+		return null;
+	}
+	public DaoProducto getDaoProducto() {
+		//implementar
+		return null;
+	}
 	
 }
 

@@ -1,52 +1,36 @@
 package Dao;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import Entities.Producto;
+import daoInterfaces.Dao;
 import factory.DAO_MYSQL_Factory;
 import factory.DaoFactory;
 
-public class DaoProducto implements DaoFactory{
+public class DaoProducto implements Dao{
+	
 
-	
-	
-	
-	
 	@Override
-	public Optional get(long id) {
+	public void insertarTodo(LinkedList datos) {
+		// implementar
 		
+	}
+
+	@Override
+	public void crearTabla() {
+		// implementar
+		
+	}
+	
+	public Producto productoQueMasRecaudo() {
+		//implementar
 		return null;
 	}
-
-	@Override
-	public List getAll() {
-		
-		return null;
-	}
-
-	@Override
-	public void insert(Object t) {
-		
-		
-	}
-
-	@Override
-	public void update(Object t, String[] params) {
-		
-		
-	}
-
-	@Override
-	public void delete(Object t) {
-		
-		
-	}
-
-	@Override
-	public void createTable() {
-		
-		
-		
-	}
+	
+	
+	
+	
 
 }

@@ -1,49 +1,36 @@
 package Dao;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import daoInterfaces.Dao;
 import factory.DAO_MYSQL_Factory;
 import factory.DaoFactory;
 
-public class DaoCliente<Cliente> implements DaoFactory{
+public class DaoCliente<Cliente> implements Dao{
 
-	
-	
 	@Override
-	public Optional get(long id) {
+	public void insertarTodo(LinkedList datos) {
+		//implementar
 		
+	}
+
+	@Override
+	public void crearTabla() {
+		// implementar
+		
+	}
+	
+	public ArrayList<Cliente> clientesOrdenadosSegunFacturacion(){
+		//implementar
 		return null;
-	}
-
-	@Override
-	public List<Cliente> getAll() {
-		
-		return null;
-	}
-
-	@Override
-	public void insert(Object t) {
-		
 		
 	}
 
-	@Override
-	public void update(Object t, String[] params) {
-		
-		
-	}
-
-	@Override
-	public void delete(Object t) {
 	
-		
-	}
+	
 
-	@Override
-	public void createTable() {
-		// TODO Apéndice de método generado automáticamente
-		
-	}
 
 }
