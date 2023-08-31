@@ -19,9 +19,7 @@ public class DaoFactura  implements DaoFactory{
 	@Override
 	public List<Factura> getAll() {
 		List<Factura> facturas = new ArrayList<>();
-		for {
-			
-		}
+		
 		return facturas;
 	}
 
