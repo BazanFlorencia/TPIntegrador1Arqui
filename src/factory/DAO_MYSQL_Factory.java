@@ -20,6 +20,7 @@ public class DAO_MYSQL_Factory extends DaoFactory{
 	private static DAO_MYSQL_Factory instance = new DAO_MYSQL_Factory(conexion);// preguntar si esta bien iniciar acá la instancia
 	
 	
+	
 	private DAO_MYSQL_Factory(Connection conexion) {
 		this.conexion = conexion;
 	}
