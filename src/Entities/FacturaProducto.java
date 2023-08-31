@@ -7,9 +7,9 @@ public class FacturaProducto {
 	
 	
 	
-	public FacturaProducto() {
+	public FacturaProducto(int idFactura, int idProd, int cantidad) {
 		this.idFactura = idFactura;
-		this.idProducto = idProducto;
+		this.idProducto = idProd;
 		this.cantidad = cantidad;
 	}
 

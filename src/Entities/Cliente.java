@@ -1,32 +1,45 @@
 package Entities;
 
 public class Cliente {
-	private int id;
+	private int idCliente;
 	private String nombre;
 	private String email;
-	
+
 	public Cliente(int id, String nombre, String email) {
-		this.id=id;
-		this.nombre=nombre;
-		this.email=email;
-		
+		this.idCliente = id;
+		this.nombre = nombre;
+		this.email = email;
+
 	}
-	
+
+	public Cliente getCliente() {
+		return new Cliente(this.idCliente, this.nombre, this.email);
+	}
+
+	public String toString() {
+		return "Id:" + this.idCliente + " " + "Nombre:" + this.nombre + " " + "Email:" + this.email;
+	}
+
 	public int getId() {
-		return id;
+		return idCliente;
 	}
+
 	public void setId(int id) {
-		this.id = id;
+		this.idCliente = id;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
