@@ -5,7 +5,9 @@ public class FacturaProducto {
 	private int idProducto;
 	private int cantidad;
 	
-	
+	public FacturaProducto() {
+		
+	}
 	
 	public FacturaProducto(int idFactura, int idProd, int cantidad) {
 		this.idFactura = idFactura;

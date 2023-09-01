@@ -3,6 +3,7 @@ package factory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.lang.reflect.InvocationTargetException;
 
 import Dao.DaoClienteMySQL;
 import Dao.DaoFacturaMySQL;
@@ -12,22 +13,28 @@ import Dao.DaoProductoMySQL;
 public class DAO_MYSQL_Factory extends DaoFactory{
 	protected static Connection conexion;
 	private final static String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static String uri; /*= "jdbc:mysql://localhost:3306/exampledb"; */ //hacerlo constante y declararlo aca?
-	private final String USER = "root";
-	private final String PASSWORD = "";
+	private final static String URI = "jdbc:mysql://localhost:3306/exampledb";  //hacerlo constante y declararlo aca?
+	private final static String USER = "root";
+	private final static String PASSWORD = "";
 	
-	private static DAO_MYSQL_Factory instance;
+	private DAO_MYSQL_Factory instance;
 	
 	
-	private DAO_MYSQL_Factory(String uri) {
-		setURI(uri); //esto borrarlo?
+	private DAO_MYSQL_Factory() {
+		//setURI(uri); //esto borrarlo?
 	    registrarDriver();
 		
 	}
+	public DAO_MYSQL_Factory getInstance() {
+		if(instance == null) {
+			instance = new DAO_MYSQL_Factory();
+		}
+		return instance;
+	}
 	//este met borrarlo?
-    public static void setURI(String urid){
+   /* public static void setURI(String urid){
         uri=urid;
-    }
+    }*/
 
    
     public static void registrarDriver(){
@@ -43,7 +50,7 @@ public class DAO_MYSQL_Factory extends DaoFactory{
 
 	public static Connection abrirConexion() throws Exception {
 		try {
-			conexion = DriverManager.getConnection(uri, USER, PASSWORD);
+			conexion = DriverManager.getConnection(URI, USER, PASSWORD);
 			Class.forName(JDBC_DRIVER);
 			return conexion;
 			
@@ -62,12 +69,7 @@ public class DAO_MYSQL_Factory extends DaoFactory{
 		}
 	}
 
-	public static DAO_MYSQL_Factory getInstance(String uri) {
-		if(instance == null) {
-			instance = new DAO_MYSQL_Factory(uri);
-		}
-		return instance;
-	}
+
 	//ESTO ES NECESARIO???
 /*	public void crearBaseDeDatos(String nombreDb) throws SQLException {
 		Connection conn  = DriverManager.getConnection("jdbc:mysql://localhost:3306",USER,PASSWORD);

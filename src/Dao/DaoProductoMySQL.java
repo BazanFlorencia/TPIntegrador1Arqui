@@ -1,45 +1,87 @@
 package Dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-
-import org.apache.commons.csv.CSVParser;
-
 import Entities.Producto;
-import daoInterfaces.Dao;
+import daoInterfaces.DaoProducto;
 import factory.DAO_MYSQL_Factory;
-import factory.DaoFactory;
 
-public class DaoProductoMySQL implements Dao{
+public class DaoProductoMySQL implements DaoProducto<Exception> {
+
+	@Override
+	public void insertarTodo(LinkedList<Producto> productos) throws Exception {
+		Connection conn = DAO_MYSQL_Factory.abrirConexion();
+		conn.prepareStatement("INSERT INTO Producto (idProducto, nombre, valor) VALUES(?,?,?)");
+		conn.setAutoCommit(false);
+		PreparedStatement preparedStatement = conn
+				.prepareStatement("INSERT INTO Producto (idProducto, nombre, valor) VALUES(?,?,?)");
+		productos.forEach(producto -> {
+			try {
+				preparedStatement.setInt(1, producto.getIdProducto());
+				preparedStatement.setString(2, producto.getNombre());
+				preparedStatement.setFloat(3, producto.getValor());
+				preparedStatement.addBatch();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+			try {
+				preparedStatement.executeBatch();
+				conn.commit();
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		});
+
+	}
+
+	@Override
+	public void crearTabla() throws SQLException, Exception {
+		Connection conn = DAO_MYSQL_Factory.abrirConexion();
+
+		// conn.prepareStatement("SET foreign_key_checks = 0;").execute();
+		// conn.prepareStatement("DROP TABLE IF EXISTS Product").execute();
+		// conn.prepareStatement("SET foreign_key_checks = 1;");
+		// conn.commit();
+		conn.prepareStatement("CREATE TABLE Producto (idProducto int PRIMARY KEY , " + " nombre varchar(45) NOT NULL,"
+				+ " valor float NOT NULL)").execute();
+		conn.commit();
+		conn.close();
+
+	}
+
+	@Override
+	public Producto productoQueMasRecaudo() throws Exception {
+		Connection conn = DAO_MYSQL_Factory.abrirConexion();
+		Producto p = null;
+		try {
+			PreparedStatement ps = conn
+					.prepareStatement("SELECT p.idProducto, p.nombre, p.valor, SUM(p.valor*fp.cantidad) as Recaudacion"
+							+ " FROM Producto p JOIN FacturaProducto fp ON p.idProducto=fp.idProducto"
+							+ " GROUP BY idProducto, nombre, valor" + " ORDER BY Recaudacion DESC" + " LIMIT 1");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				p = new Producto(rs.getInt(1), rs.getString(2), rs.getFloat(3));
+			}
+			conn.commit();
+			conn.close();
+			return p;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return p;
+	}
+
+
 	
 
 
 
-	@Override
-	public void crearTabla() {
-		// implementar
-		
-	}
-	
-	public Producto productoQueMasRecaudo() {
-		//implementar
-		return null;
-	}
 
-	@Override
-	public void insertarTodo(CSVParser parser, Connection conn) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void leerCSV(String csv, String uri) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 	

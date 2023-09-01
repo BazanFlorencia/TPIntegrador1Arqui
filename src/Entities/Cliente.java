@@ -20,11 +20,11 @@ public class Cliente {
 		return "Id:" + this.idCliente + " " + "Nombre:" + this.nombre + " " + "Email:" + this.email;
 	}
 
-	public int getId() {
+	public int getIdCliente() {
 		return idCliente;
 	}
 
-	public void setId(int id) {
+	public void setIdCliente(int id) {
 		this.idCliente = id;
 	}
 
