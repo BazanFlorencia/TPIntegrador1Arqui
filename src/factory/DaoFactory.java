@@ -10,7 +10,6 @@ import Dao.DaoProductoMySQL;
 
 public abstract class DaoFactory {
 	
-	//private static DaoFactory fabricaMySQL;
 
 	public abstract DaoClienteMySQL getDaoCliente();
 
@@ -20,10 +19,7 @@ public abstract class DaoFactory {
 
 	public abstract DaoProductoMySQL getDaoProducto();
 	
-	//public static abstract DaoFactory getInstance();
 	
-	//public  static abstract DAO_MYSQL_Factory getInstance();
-
 	public static DaoFactory getDaoFactory(String baseDeDatos) {
 
 		switch (baseDeDatos) {

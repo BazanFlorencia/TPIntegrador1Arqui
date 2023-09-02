@@ -16,11 +16,6 @@ public class DaoClienteMySQL implements DaoCliente<Exception> {
 	public void crearTabla() throws SQLException, Exception {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
 
-		// conn.prepareStatement("SET foreign_key_checks = 0;").execute();
-		// conn.prepareStatement("DROP TABLE IF EXISTS Client").execute();
-		// conn.prepareStatement("SET foreign_key_checks = 1;");
-		// conn.commit();
-		
 		conn.prepareStatement(
 				"CREATE TABLE IF NOT EXISTS Cliente (idCliente INT PRIMARY KEY , nombre VARCHAR(50) NOT NULL, email VARCHAR(150) NOT NULL)")
 				.execute();

@@ -13,11 +13,6 @@ public class DaoFacturaProductoMySQL implements DaoFacturaProducto<Exception> {
 	public void crearTabla() throws SQLException, Exception {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
 		
-		// esto es necesario??
-		// conn.prepareStatement("SET foreign_key_checks = 0;").execute();
-		// conn.prepareStatement("DROP TABLE IF EXISTS BillProduct").execute();
-		// conn.prepareStatement("SET foreign_key_checks = 1;").execute();
-		// conn.commit();
 		conn.prepareStatement("CREATE TABLE IF NOT EXISTS FacturaProducto (idFactura integer NOT NULL , "
 				+ "idProducto integer NOT NULL," + " cantidad integer NOT NULL,"
 				+ " PRIMARY KEY (idFactura, idProducto)," + " FOREIGN KEY (idFactura) REFERENCES Factura (idFactura),"
@@ -52,10 +47,5 @@ public class DaoFacturaProductoMySQL implements DaoFacturaProducto<Exception> {
 		});
 	}
 
-
-
-
-
-	
 
 }

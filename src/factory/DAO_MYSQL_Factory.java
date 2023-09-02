@@ -22,7 +22,6 @@ public class DAO_MYSQL_Factory extends DaoFactory{
 	
 	private DAO_MYSQL_Factory() {
 		
-		//setURI(uri); //esto borrarlo?
 	    registrarDriver();
 	 	
 	}
@@ -33,12 +32,8 @@ public class DAO_MYSQL_Factory extends DaoFactory{
 		}
 		return instance;
 	}
-	//este met borrarlo?
-   /* public static void setURI(String urid){
-        uri=urid;
-    }*/
 
-   
+
     public static void registrarDriver(){
         try {
             Class.forName(JDBC_DRIVER).getDeclaredConstructor().newInstance();
@@ -71,16 +66,6 @@ public class DAO_MYSQL_Factory extends DaoFactory{
 			}
 		}
 	}
-
-
-	//ESTO ES NECESARIO???
-	/*public void crearBaseDeDatos(String nombreDb) throws SQLException {
-		Connection conn  = DriverManager.getConnection("jdbc:mysql://localhost:3306",USER,PASSWORD);
-        conn.setAutoCommit(false);
-        String sql = "CREATE DATABASE IF NOT EXISTS" + " " +  nombreDb;
-        conn.prepareStatement(sql).execute();
-        conn.close();
-	}*/
 
 	public DaoClienteMySQL getDaoCliente() {
 		

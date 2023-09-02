@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import Entities.Producto;
+import Entities.ProductoConMasRecaudacion;
 import daoInterfaces.DaoProducto;
 import factory.DAO_MYSQL_Factory;
 
@@ -41,10 +42,6 @@ public class DaoProductoMySQL implements DaoProducto<Exception> {
 	public void crearTabla() throws SQLException, Exception {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
 		
-		// conn.prepareStatement("SET foreign_key_checks = 0;").execute();
-		// conn.prepareStatement("DROP TABLE IF EXISTS Product").execute();
-		// conn.prepareStatement("SET foreign_key_checks = 1;");
-		// conn.commit();
 		conn.prepareStatement("CREATE TABLE IF NOT EXISTS Producto (idProducto int PRIMARY KEY , " + " nombre varchar(45) NOT NULL,"
 				+ " valor float NOT NULL)").execute();
 		conn.commit();
@@ -55,7 +52,7 @@ public class DaoProductoMySQL implements DaoProducto<Exception> {
 	@Override
 	public Producto productoQueMasRecaudo() throws Exception {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
-		Producto p = null;
+		ProductoConMasRecaudacion pr = null;
 		try {
 			
 			PreparedStatement ps = conn
@@ -64,16 +61,16 @@ public class DaoProductoMySQL implements DaoProducto<Exception> {
 							+ " GROUP BY idProducto, nombre, valor" + " ORDER BY Recaudacion DESC" + " LIMIT 1");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				p = new Producto(rs.getInt(1), rs.getString(2), rs.getFloat(3));
+				pr = new ProductoConMasRecaudacion(rs.getInt(1), rs.getString(2), rs.getFloat(3), rs.getFloat(4));
 			}
 			conn.commit();
 			conn.close();
-			return p;
+			return pr;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return p;
+		return pr;
 	}
 
 

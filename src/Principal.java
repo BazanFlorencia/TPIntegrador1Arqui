@@ -12,8 +12,6 @@ import daoInterfaces.DaoCliente;
 import LectorCSV.LectorProductoCSV;
 import factory.DaoFactory;
 
-//import factory.DAO_MYSQL_Factory;
-
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,11 +34,7 @@ public class Principal {
 	public static void main(String[] args) throws Throwable {
 
 		crearBaseDeDatos("db_tp_jdbc_arqui_grupo_18");
-		//System.out.println("Base de datos creada");
-
 		
-		// Creamos base de datos para mySQL (SOLO PARA TESTEO)
-		//DAO_MYSQL_Factory.crearBaseDeDatos("arqui"); // hacerlo en el main
 
 		// Obtenemos el DAO de mySQL
 		DaoFactory daoMySQL = DaoFactory.getDaoFactory("MYSQL");
@@ -51,7 +45,7 @@ public class Principal {
 		DaoProducto daoProducto = daoMySQL.getDaoProducto();
 		DaoFacturaProducto daoFacturaProducto = daoMySQL.getDaoFacturaProducto();
 
-		// lectura de CSV's
+		// lectura de CSV
 		String direccionArchivo = new File("").getAbsolutePath();
 		LinkedList<Cliente> clientes = new LectorClienteCSV(direccionArchivo + "/src/csv/clientes.csv").getClientes();
 		LinkedList<Factura> facturas = new LectorFacturaCSV(direccionArchivo + "/src/csv/facturas.csv").getFacturas();
