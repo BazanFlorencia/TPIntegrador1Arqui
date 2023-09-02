@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import Entities.Cliente;
+import Entities.ClienteConFacturacion;
 import daoInterfaces.DaoCliente;
 import factory.DAO_MYSQL_Factory;
 
@@ -37,7 +38,7 @@ public class DaoClienteMySQL implements DaoCliente<Exception> {
 							+ "GROUP BY c.idCliente, c.nombre, c.email " + "ORDER BY Facturacion DESC;\n");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Cliente c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3));
+				Cliente c = new ClienteConFacturacion(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getFloat(4));
 				clientes.add(c);
 			}
 			conn.commit();
