@@ -13,19 +13,21 @@ import Dao.DaoProductoMySQL;
 public class DAO_MYSQL_Factory extends DaoFactory{
 	protected static Connection conexion;
 	private final static String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-	private final static String URI = "jdbc:mysql://localhost:3306/exampledb";  //hacerlo constante y declararlo aca?
+	private final static String URI = "jdbc:mysql://localhost:3306/db_tp_jdbc_arqui_grupo_18";  //hacerlo constante y declararlo aca?
 	private final static String USER = "root";
 	private final static String PASSWORD = "";
 	
-	private DAO_MYSQL_Factory instance;
+	private static DAO_MYSQL_Factory instance;
 	
 	
 	private DAO_MYSQL_Factory() {
+		
 		//setURI(uri); //esto borrarlo?
 	    registrarDriver();
-		
+	 	
 	}
-	public DAO_MYSQL_Factory getInstance() {
+
+	public static DaoFactory getInstance() {
 		if(instance == null) {
 			instance = new DAO_MYSQL_Factory();
 		}
@@ -51,6 +53,7 @@ public class DAO_MYSQL_Factory extends DaoFactory{
 	public static Connection abrirConexion() throws Exception {
 		try {
 			conexion = DriverManager.getConnection(URI, USER, PASSWORD);
+			conexion.setAutoCommit(false);
 			Class.forName(JDBC_DRIVER);
 			return conexion;
 			
@@ -71,7 +74,7 @@ public class DAO_MYSQL_Factory extends DaoFactory{
 
 
 	//ESTO ES NECESARIO???
-/*	public void crearBaseDeDatos(String nombreDb) throws SQLException {
+	/*public void crearBaseDeDatos(String nombreDb) throws SQLException {
 		Connection conn  = DriverManager.getConnection("jdbc:mysql://localhost:3306",USER,PASSWORD);
         conn.setAutoCommit(false);
         String sql = "CREATE DATABASE IF NOT EXISTS" + " " +  nombreDb;

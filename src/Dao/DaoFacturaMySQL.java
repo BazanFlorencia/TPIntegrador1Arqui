@@ -14,7 +14,7 @@ public class DaoFacturaMySQL  implements DaoFactura<Exception>{
 	@Override
 	public void insertarTodo(LinkedList <Factura> facturas) throws Exception {
 		 Connection conn = DAO_MYSQL_Factory.abrirConexion();
-	        conn.setAutoCommit(false);
+	      
 	        PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO Factura(idFactura, idCliente) VALUES(?,?)");
 	        facturas.forEach(factura -> {
 	            try {
@@ -37,12 +37,13 @@ public class DaoFacturaMySQL  implements DaoFactura<Exception>{
 	@Override
 	public void crearTabla()  throws SQLException, Exception {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
+		
         //Only for testing: Disable the foreing key checks to allow drop table
        // conn.prepareStatement("SET foreign_key_checks = 0;").execute();
        // conn.prepareStatement("DROP TABLE IF EXISTS Factura").execute();
        // conn.prepareStatement("SET foreign_key_checks = 1;").execute();
         //conn.commit();
-        conn.prepareStatement("CREATE TABLE Factura (idFactura INT PRIMARY KEY , idCliente INT NOT NULL, FOREIGN KEY (idCliente) REFERENCES Cliente (id)" +
+        conn.prepareStatement("CREATE TABLE IF NOT EXISTS Factura (idFactura INT PRIMARY KEY , idCliente INT NOT NULL, FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente)" +
                 "ON DELETE RESTRICT)").execute();
         conn.commit();
         conn.close();

@@ -20,8 +20,9 @@ public class DaoClienteMySQL implements DaoCliente<Exception> {
 		// conn.prepareStatement("DROP TABLE IF EXISTS Client").execute();
 		// conn.prepareStatement("SET foreign_key_checks = 1;");
 		// conn.commit();
+		
 		conn.prepareStatement(
-				"CREATE TABLE Cliente (idCliente INT PRIMARY KEY , nombre VARCHAR(50) NOT NULL, email VARCHAR(150) NOT NULL)")
+				"CREATE TABLE IF NOT EXISTS Cliente (idCliente INT PRIMARY KEY , nombre VARCHAR(50) NOT NULL, email VARCHAR(150) NOT NULL)")
 				.execute();
 		conn.commit();
 		conn.close();
@@ -57,7 +58,7 @@ public class DaoClienteMySQL implements DaoCliente<Exception> {
 	public void insertarTodo(LinkedList<Cliente> clientes) throws Exception {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
 		conn.prepareStatement("INSERT INTO Cliente (idCliente,nombre,email) VALUES(?,?,?)");
-		conn.setAutoCommit(false);
+		
 		PreparedStatement preparedStatement = conn
 				.prepareStatement("INSERT INTO Cliente (idCliente,nombre,email) VALUES(?,?,?)");
 		clientes.forEach(cliente -> {

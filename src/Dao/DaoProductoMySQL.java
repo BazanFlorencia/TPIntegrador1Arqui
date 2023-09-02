@@ -15,7 +15,7 @@ public class DaoProductoMySQL implements DaoProducto<Exception> {
 	public void insertarTodo(LinkedList<Producto> productos) throws Exception {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
 		conn.prepareStatement("INSERT INTO Producto (idProducto, nombre, valor) VALUES(?,?,?)");
-		conn.setAutoCommit(false);
+		
 		PreparedStatement preparedStatement = conn
 				.prepareStatement("INSERT INTO Producto (idProducto, nombre, valor) VALUES(?,?,?)");
 		productos.forEach(producto -> {
@@ -40,12 +40,12 @@ public class DaoProductoMySQL implements DaoProducto<Exception> {
 	@Override
 	public void crearTabla() throws SQLException, Exception {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
-
+		
 		// conn.prepareStatement("SET foreign_key_checks = 0;").execute();
 		// conn.prepareStatement("DROP TABLE IF EXISTS Product").execute();
 		// conn.prepareStatement("SET foreign_key_checks = 1;");
 		// conn.commit();
-		conn.prepareStatement("CREATE TABLE Producto (idProducto int PRIMARY KEY , " + " nombre varchar(45) NOT NULL,"
+		conn.prepareStatement("CREATE TABLE IF NOT EXISTS Producto (idProducto int PRIMARY KEY , " + " nombre varchar(45) NOT NULL,"
 				+ " valor float NOT NULL)").execute();
 		conn.commit();
 		conn.close();
@@ -57,6 +57,7 @@ public class DaoProductoMySQL implements DaoProducto<Exception> {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
 		Producto p = null;
 		try {
+			
 			PreparedStatement ps = conn
 					.prepareStatement("SELECT p.idProducto, p.nombre, p.valor, SUM(p.valor*fp.cantidad) as Recaudacion"
 							+ " FROM Producto p JOIN FacturaProducto fp ON p.idProducto=fp.idProducto"

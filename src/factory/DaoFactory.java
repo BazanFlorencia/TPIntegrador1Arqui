@@ -9,8 +9,8 @@ import Dao.DaoFacturaProductoMySQL;
 import Dao.DaoProductoMySQL;
 
 public abstract class DaoFactory {
-	//private DAO_MYSQL_Factory fabricaMysql; //esto esta bien???
-	private static DaoFactory fabricaMySQL;
+	
+	//private static DaoFactory fabricaMySQL;
 
 	public abstract DaoClienteMySQL getDaoCliente();
 
@@ -20,13 +20,15 @@ public abstract class DaoFactory {
 
 	public abstract DaoProductoMySQL getDaoProducto();
 	
-	public  abstract DAO_MYSQL_Factory getInstance();
+	//public static abstract DaoFactory getInstance();
+	
+	//public  static abstract DAO_MYSQL_Factory getInstance();
 
 	public static DaoFactory getDaoFactory(String baseDeDatos) {
 
 		switch (baseDeDatos) {
 		case "MYSQL":
-			return fabricaMySQL.getInstance();
+			return DAO_MYSQL_Factory.getInstance();
 		case "DERBY":
 			return null;
 		case "POSTGRESQL":
@@ -37,6 +39,10 @@ public abstract class DaoFactory {
 
 		
 	}
+
+
+		
+
 
 	
 

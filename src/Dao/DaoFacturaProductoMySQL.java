@@ -8,16 +8,17 @@ import Entities.FacturaProducto;
 import daoInterfaces.DaoFacturaProducto;
 import factory.DAO_MYSQL_Factory;
 
-public class DaoFacturaProductoMySQL<T> implements DaoFacturaProducto<Exception> {
+public class DaoFacturaProductoMySQL implements DaoFacturaProducto<Exception> {
 
 	public void crearTabla() throws SQLException, Exception {
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
+		
 		// esto es necesario??
 		// conn.prepareStatement("SET foreign_key_checks = 0;").execute();
 		// conn.prepareStatement("DROP TABLE IF EXISTS BillProduct").execute();
 		// conn.prepareStatement("SET foreign_key_checks = 1;").execute();
 		// conn.commit();
-		conn.prepareStatement("CREATE TABLE FacturaProducto (idFactura integer NOT NULL , "
+		conn.prepareStatement("CREATE TABLE IF NOT EXISTS FacturaProducto (idFactura integer NOT NULL , "
 				+ "idProducto integer NOT NULL," + " cantidad integer NOT NULL,"
 				+ " PRIMARY KEY (idFactura, idProducto)," + " FOREIGN KEY (idFactura) REFERENCES Factura (idFactura),"
 				+ " FOREIGN KEY (idProducto) REFERENCES Producto (idProducto)" + "ON DELETE RESTRICT)").execute();
@@ -30,7 +31,7 @@ public class DaoFacturaProductoMySQL<T> implements DaoFacturaProducto<Exception>
 		
 		Connection conn = DAO_MYSQL_Factory.abrirConexion();
 		conn.prepareStatement("INSERT INTO FacturaProducto (idFactura, idProducto, cantidad) VALUES(?,?,?)");
-		conn.setAutoCommit(false);
+	
 		PreparedStatement preparedStatement = conn
 				.prepareStatement("INSERT INTO FacturaProducto (idFactura, idProducto, cantidad) VALUES(?,?,?)");
 		datos.forEach(FacturaProducto -> {

@@ -9,7 +9,7 @@ public class LectorProductoCSV extends LectorCSV {
 	 public LectorProductoCSV(String direccionCSV){
 	        super(direccionCSV);
 	    }
-	 public LinkedList<Producto> getProduct() throws IOException {
+	 public LinkedList<Producto> getProductos() throws IOException {
 	        Iterable<CSVRecord> registros =  this.leer();
 	        LinkedList<Producto> productos = new LinkedList<>();
 	        for (CSVRecord registro : registros) {
