@@ -61,10 +61,10 @@ public class Principal {
 		daoFacturaProducto.crearTabla();
 
 		// insertamos los datos en las tablas
-		/*daoCliente.insertarTodo(clientes);
+		daoCliente.insertarTodo(clientes);
 		daoFactura.insertarTodo(facturas);
 		daoProducto.insertarTodo(productos);
-		daoFacturaProducto.insertarTodo(facturasProductos);*/
+		daoFacturaProducto.insertarTodo(facturasProductos);
 
 		// Obtenemos el producto con mayor recaudacion
 		// punto 3
